@@ -9,9 +9,10 @@ It is a tool for pack and server makers who want progression — a profession, a
 
 - **craft** — the item can't be taken out of an output slot: crafting table and inventory grid, furnaces, smithing table, stonecutter, loom, and modded workstations whose output slot refuses inserted items.
 - **use** — the item can't be right-clicked, placed or used on entities.
+- **items** — both `craft` and `use`.
 - **blocks** — right-clicking the block does nothing, so its screen doesn't open.
 - **menus** — screens of these types close as soon as they open, however they were opened.
-- **JEI** (optional) — locked items are hidden from the list until unlocked, or stay listed with an "Unlocks at" line in the tooltip.
+- **JEI** (optional) — locked items are hidden from the list until unlocked (`"jei": "hide"`, the default), or stay listed with an "Unlocks at" line in the tooltip (`"show"`).
 
 Every list accepts item ids, tags (`#c:ingots`), all items of a mod (`@modid`) and `*` wildcards. Ids of mods that aren't installed are ignored, so one data set can serve several setups. A refused player always sees why on the action bar, for example "You can't use the Furnace yet. Unlocks at: Smelting".
 
@@ -34,7 +35,7 @@ One file per stage, `data/<namespace>/pack_stages/stages/<path>.json` — `stage
 
 ## Commands
 
-`/pack_stages add|remove <players> <stage>`, `clear`, `list`, `has` (returns 1 or 0 for `execute if`), `stages` (what the loaded data defines) and `milestones reset`. Permission level 2. Stages are saved with the player and kept on death.
+`/pack_stages add|remove <players> <stage>`, `clear`, `list`, `has` (returns 1 or 0, for `execute store result`), `stages` (what the loaded data defines) and `milestones reset`. Permission level 2. Stages are saved with the player and kept on death.
 
 ## Limits
 
