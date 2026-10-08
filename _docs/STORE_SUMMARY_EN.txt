@@ -1,0 +1,1 @@
+Lock crafting, item use and workstations per player until a stage is granted, all defined in datapack JSON.
