@@ -1,0 +1,22 @@
+{
+  "apprentice": {
+    "title": "見習い",
+    "description": "陶芸台で鉢や植木鉢を作れる",
+    "icon": { "type": "item", "data": { "item": "lilis_pottery:pottery_table" } },
+    "rewards": [
+      { "type": "puffish_skills:command", "data": {
+        "unlock_command": "pack_stages add @s potter.apprentice",
+        "lock_command": "pack_stages remove @s potter.apprentice" } }
+    ]
+  },
+  "journeyman": {
+    "title": "職人",
+    "description": "窯で器に色を付け、花瓶やアンフォラを作れる",
+    "icon": { "type": "item", "data": { "item": "lilis_pottery:kiln" } },
+    "rewards": [
+      { "type": "puffish_skills:command", "data": {
+        "unlock_command": "pack_stages add @s potter.journeyman",
+        "lock_command": "pack_stages remove @s potter.journeyman" } }
+    ]
+  }
+}

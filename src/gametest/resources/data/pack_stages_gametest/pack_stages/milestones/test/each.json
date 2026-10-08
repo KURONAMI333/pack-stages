@@ -1,0 +1,4 @@
+{
+  "items": ["minecraft:diamond", "minecraft:emerald"],
+  "commands": ["scoreboard players add @s ps_each 1"]
+}

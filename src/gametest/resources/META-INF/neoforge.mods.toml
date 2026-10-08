@@ -1,0 +1,16 @@
+# Development-only companion mod holding the GameTests. Never shipped (not an input of the jar task).
+# Literal values only: resource expansion is configured for the main source set.
+modLoader = "javafml"
+loaderVersion = "[4,)"
+license = "All Rights Reserved"
+[[mods]]
+modId = "pack_stages_gametest"
+version = "0.0.0"
+displayName = "Pack Stages GameTests (dev only)"
+description = '''Holds the Pack Stages GameTests. Development only; never shipped.'''
+[[dependencies.pack_stages_gametest]]
+modId = "pack_stages"
+type = "required"
+versionRange = "[0,)"
+ordering = "AFTER"
+side = "BOTH"

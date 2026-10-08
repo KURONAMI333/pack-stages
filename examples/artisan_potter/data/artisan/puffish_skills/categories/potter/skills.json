@@ -1,0 +1,4 @@
+{
+  "apprentice": { "definition": "apprentice", "x": 0, "y": 0, "root": true },
+  "journeyman": { "definition": "journeyman", "x": 0, "y": 40 }
+}

@@ -1,0 +1,6 @@
+{
+  "display": "Test Smith",
+  "craft": ["minecraft:stick"],
+  "use": ["minecraft:ender_pearl"],
+  "blocks": ["minecraft:furnace"]
+}

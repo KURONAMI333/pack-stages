@@ -1,0 +1,16 @@
+{
+  "pack_stages.locked.craft": "You can't make %s yet. Unlocks at: %s",
+  "pack_stages.locked.use": "You can't use %s yet. Unlocks at: %s",
+  "pack_stages.locked.block": "You can't use the %s yet. Unlocks at: %s",
+  "pack_stages.locked.menu": "You can't use this yet. Unlocks at: %2$s",
+  "pack_stages.tooltip.locked": "Unlocks at: %s",
+  "pack_stages.command.add": "Added stage %s to %s player(s)",
+  "pack_stages.command.add.undefined": "Added stage %s to %s player(s) (no pack data defines this stage)",
+  "pack_stages.command.remove": "Removed stage %s from %s player(s)",
+  "pack_stages.command.clear": "Removed %s stage(s)",
+  "pack_stages.command.list": "%s has %s stage(s): %s",
+  "pack_stages.command.has.yes": "%s has stage %s",
+  "pack_stages.command.has.no": "%s does not have stage %s",
+  "pack_stages.command.stages": "%s stage(s) defined: %s. Milestones: %s",
+  "pack_stages.command.milestones.reset": "Forgot %s milestone record(s)"
+}

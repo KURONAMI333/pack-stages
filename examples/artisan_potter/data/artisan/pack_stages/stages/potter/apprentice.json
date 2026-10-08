@@ -1,0 +1,12 @@
+{
+  "display": "陶芸師・見習い",
+  "blocks": ["lilis_pottery:pottery_table", "lilis_pottery:lilis_pottery_table"],
+  "craft": [
+    "lilis_pottery:pottery_table",
+    "lilis_pottery:*garden_pot",
+    "lilis_pottery:*plant_bowl",
+    "lilis_pottery:*square_pot",
+    "lilis_pottery:*planter",
+    "lilis_pottery:handmade_brick*"
+  ]
+}

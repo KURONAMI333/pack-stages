@@ -1,0 +1,9 @@
+{
+  "display": "陶芸師・職人",
+  "blocks": ["lilis_pottery:kiln"],
+  "craft": [
+    "lilis_pottery:kiln",
+    "lilis_pottery:*vase",
+    "lilis_pottery:*amphore"
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "pack_stages.locked.craft": "%s はまだ作れません。解放: %s",
+  "pack_stages.locked.use": "%s はまだ使えません。解放: %s",
+  "pack_stages.locked.block": "%s はまだ使えません。解放: %s",
+  "pack_stages.locked.menu": "これはまだ使えません。解放: %2$s",
+  "pack_stages.tooltip.locked": "解放: %s",
+  "pack_stages.command.add": "段階 %s を %s 人に付けました",
+  "pack_stages.command.add.undefined": "段階 %s を %s 人に付けました（この段階を定義するデータはありません）",
+  "pack_stages.command.remove": "段階 %s を %s 人から外しました",
+  "pack_stages.command.clear": "段階を %s 個外しました",
+  "pack_stages.command.list": "%s の段階（%s 個）: %s",
+  "pack_stages.command.has.yes": "%s は段階 %s を持っています",
+  "pack_stages.command.has.no": "%s は段階 %s を持っていません",
+  "pack_stages.command.stages": "定義済みの段階 %s 個: %s。初取得の報酬: %s 件",
+  "pack_stages.command.milestones.reset": "初取得の記録を %s 件消しました"
+}

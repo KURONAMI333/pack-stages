@@ -1,0 +1,7 @@
+{
+  "title": "陶芸師",
+  "icon": { "type": "item", "data": { "item": "minecraft:clay_ball" } },
+  "background": { "texture": "minecraft:textures/block/terracotta.png", "width": 16, "height": 16 },
+  "unlocked_by_default": true,
+  "starting_points": 0
+}
