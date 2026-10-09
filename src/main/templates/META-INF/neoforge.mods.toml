@@ -9,6 +9,8 @@ version="${mod_version}"
 displayName="${mod_name}"
 authors="${mod_authors}"
 displayURL="https://www.curseforge.com/minecraft/mc-mods/pack-stages"
+logoFile="pack_stages.png"
+logoBlur=false
 description='''
 ${mod_description}
 '''
