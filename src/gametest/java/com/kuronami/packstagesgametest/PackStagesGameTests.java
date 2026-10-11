@@ -1,6 +1,5 @@
 package com.kuronami.packstagesgametest;
 
-import com.kuronami.packstages.MilestoneTracker;
 import com.kuronami.packstages.StageAccess;
 import com.kuronami.packstages.player.PlayerStages;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
@@ -29,8 +28,6 @@ import net.minecraft.world.level.GameType;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.Vec3;
-import net.minecraft.world.scores.Objective;
-import net.minecraft.world.scores.ScoreHolder;
 import net.neoforged.neoforge.gametest.GameTestHolder;
 import net.neoforged.neoforge.gametest.PrefixGameTestTemplate;
 
@@ -134,54 +131,6 @@ public final class PackStagesGameTests {
         helper.succeed();
     }
 
-    /** 初めて手に入れた時に1回だけコマンドが走る: "each" mode, once per distinct item. */
-    @GameTest(template = "empty3x3x3")
-    public static void milestoneEachRunsOncePerItem(GameTestHelper helper) {
-        ServerPlayer p = player(helper);
-        freshObjective(p, "ps_each");
-        // Commands run on the tick after the item is seen, so check after a short wait.
-        helper.startSequence()
-                .thenExecute(() -> {
-                    p.getInventory().add(new ItemStack(Items.DIAMOND));
-                    MilestoneTracker.scan(p);
-                    MilestoneTracker.scan(p);
-                    p.getInventory().add(new ItemStack(Items.DIAMOND, 5));
-                    MilestoneTracker.scan(p);
-                })
-                .thenExecuteAfter(3, () -> helper.assertTrue(score(p, "ps_each") == 1,
-                        "diamond counted " + score(p, "ps_each") + " times"))
-                .thenExecute(() -> {
-                    p.getInventory().add(new ItemStack(Items.EMERALD));
-                    MilestoneTracker.scan(p);
-                })
-                .thenExecuteAfter(3, () -> helper.assertTrue(score(p, "ps_each") == 2, "emerald not counted separately"))
-                .thenExecute(() -> {
-                    // Losing and regaining the item does not count again.
-                    p.getInventory().clearContent();
-                    p.getInventory().add(new ItemStack(Items.DIAMOND));
-                    MilestoneTracker.scan(p);
-                })
-                .thenExecuteAfter(3, () -> helper.assertTrue(score(p, "ps_each") == 2, "regained diamond counted again"))
-                .thenSucceed();
-    }
-
-    /** "once" mode: the whole set pays out a single time. */
-    @GameTest(template = "empty3x3x3")
-    public static void milestoneOnceRunsOnceForSet(GameTestHelper helper) {
-        ServerPlayer p = player(helper);
-        freshObjective(p, "ps_once");
-        helper.startSequence()
-                .thenExecute(() -> {
-                    p.getInventory().add(new ItemStack(Items.GOLD_INGOT));
-                    MilestoneTracker.scan(p);
-                    p.getInventory().add(new ItemStack(Items.IRON_INGOT));
-                    MilestoneTracker.scan(p);
-                })
-                .thenExecuteAfter(3, () -> helper.assertTrue(score(p, "ps_once") == 1,
-                        "once-milestone ran " + score(p, "ps_once") + " times"))
-                .thenSucceed();
-    }
-
     /** Double-click gathering must not pull a locked item out of a furnace output. */
     @GameTest(template = "empty3x3x3")
     public static void pickAllSkipsLockedFurnaceOutput(GameTestHelper helper) {
@@ -220,31 +169,14 @@ public final class PackStagesGameTests {
         helper.succeed();
     }
 
-    /** Stages and milestone records survive save/load. */
+    /** Stages survive save/load. */
     @GameTest(template = "empty3x3x3")
     public static void playerDataRoundTrips(GameTestHelper helper) {
         ServerPlayer p = player(helper);
         run(p, "pack_stages add @s test.smith");
-        StageAccess.data(p).markMilestone("x:y|minecraft:stone");
         Tag tag = PlayerStages.CODEC.encodeStart(NbtOps.INSTANCE, StageAccess.data(p)).getOrThrow();
         PlayerStages back = PlayerStages.CODEC.parse(NbtOps.INSTANCE, tag).getOrThrow();
         helper.assertTrue(back.stages().contains("test.smith"), "stage lost in round trip");
-        helper.assertTrue(!back.markMilestone("x:y|minecraft:stone"), "milestone record lost in round trip");
         helper.succeed();
-    }
-
-    /** The test world is reused between runs, so start each objective from zero. */
-    private static void freshObjective(ServerPlayer p, String name) {
-        var board = p.getScoreboard();
-        Objective old = board.getObjective(name);
-        if (old != null) board.removeObjective(old);
-        run(p, "scoreboard objectives add " + name + " dummy");
-    }
-
-    private static int score(ServerPlayer p, String objective) {
-        Objective obj = p.getScoreboard().getObjective(objective);
-        if (obj == null) return -1;
-        var info = p.getScoreboard().getPlayerScoreInfo(ScoreHolder.forNameOnly(p.getScoreboardName()), obj);
-        return info == null ? 0 : info.value();
     }
 }

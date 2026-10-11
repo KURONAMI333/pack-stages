@@ -11,7 +11,6 @@ import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.SharedSuggestionProvider;
 import net.minecraft.commands.arguments.EntityArgument;
-import net.minecraft.commands.arguments.ResourceLocationArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -19,14 +18,12 @@ import java.util.Collection;
 import java.util.stream.Collectors;
 
 /**
- * {@code /pack_stages add|remove|clear|list|has|stages|milestones reset}. Permission level 2, the same
+ * {@code /pack_stages add|remove|clear|list|has|stages}. Permission level 2, the same
  * level datapack functions and Pufferfish's Skills command rewards run at.
  */
 public final class StagesCommand {
     private static final SuggestionProvider<CommandSourceStack> STAGE_NAMES = (ctx, builder) ->
             SharedSuggestionProvider.suggest(ServerStageData.definitions().stream().map(StageDefinition::name), builder);
-    private static final SuggestionProvider<CommandSourceStack> MILESTONE_IDS = (ctx, builder) ->
-            SharedSuggestionProvider.suggestResource(ServerStageData.milestones().stream().map(m -> m.id()), builder);
 
     private StagesCommand() {}
 
@@ -52,14 +49,7 @@ public final class StagesCommand {
                         .then(Commands.argument("target", EntityArgument.player())
                                 .then(Commands.argument("stage", StringArgumentType.word()).suggests(STAGE_NAMES)
                                         .executes(StagesCommand::has))))
-                .then(Commands.literal("stages").executes(StagesCommand::defined))
-                .then(Commands.literal("milestones")
-                        .then(Commands.literal("reset")
-                                .then(Commands.argument("targets", EntityArgument.players())
-                                        .executes(ctx -> resetMilestones(ctx, null))
-                                        .then(Commands.argument("milestone", ResourceLocationArgument.id()).suggests(MILESTONE_IDS)
-                                                .executes(ctx -> resetMilestones(ctx,
-                                                        ResourceLocationArgument.getId(ctx, "milestone").toString())))))));
+                .then(Commands.literal("stages").executes(StagesCommand::defined)));
     }
 
     private static int add(CommandContext<CommandSourceStack> ctx) throws CommandSyntaxException {
@@ -112,17 +102,8 @@ public final class StagesCommand {
     private static int defined(CommandContext<CommandSourceStack> ctx) {
         var defs = ServerStageData.definitions();
         String joined = defs.isEmpty() ? "-" : defs.stream().map(StageDefinition::name).sorted().collect(Collectors.joining(", "));
-        int milestones = ServerStageData.milestones().size();
         ctx.getSource().sendSuccess(() -> Component.translatable("pack_stages.command.stages",
-                defs.size(), joined, milestones), false);
+                defs.size(), joined), false);
         return defs.size();
-    }
-
-    private static int resetMilestones(CommandContext<CommandSourceStack> ctx, String id) throws CommandSyntaxException {
-        int total = 0;
-        for (ServerPlayer p : EntityArgument.getPlayers(ctx, "targets")) total += StageAccess.data(p).resetMilestones(id);
-        int n = total;
-        ctx.getSource().sendSuccess(() -> Component.translatable("pack_stages.command.milestones.reset", n), true);
-        return total;
     }
 }

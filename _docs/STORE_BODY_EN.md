@@ -12,7 +12,7 @@ It is a tool for pack and server makers who want progression — a profession, a
 - **items** — both `craft` and `use`.
 - **blocks** — right-clicking the block does nothing, so its screen doesn't open.
 - **menus** — screens of these types close as soon as they open, however they were opened.
-- **JEI** (optional) — locked items are hidden from the list until unlocked (`"jei": "hide"`, the default), or stay listed with an "Unlocks at" line in the tooltip (`"show"`).
+- **JEI** (optional) — locked items stay listed with an "Unlocks at" line in the tooltip (`"jei": "show"`, the default), or are hidden until unlocked (`"hide"`).
 
 Every list accepts item ids, tags (`#c:ingots`), all items of a mod (`@modid`) and `*` wildcards. Ids of mods that aren't installed are ignored, so one data set can serve several setups. A refused player always sees why on the action bar, for example "You can't use the Furnace yet. Unlocks at: Smelting".
 
@@ -29,13 +29,9 @@ One file per stage, `data/<namespace>/pack_stages/stages/<path>.json` — `stage
 }
 ```
 
-## First-time milestones
-
-`data/<namespace>/pack_stages/milestones/<path>.json` runs commands the first time a player holds a listed item, however they got it — useful for skill experience or a message. Each player's record is saved, so picking the item up again doesn't count twice.
-
 ## Commands
 
-`/pack_stages add|remove <players> <stage>`, `clear`, `list`, `has` (returns 1 or 0, for `execute store result`), `stages` (what the loaded data defines) and `milestones reset`. Permission level 2. Stages are saved with the player and kept on death.
+`/pack_stages add|remove <players> <stage>`, `clear`, `list`, `has` (returns 1 or 0, for `execute store result`), and `stages` (what the loaded data defines). Permission level 2. Stages are saved with the player and kept on death.
 
 ## Limits
 

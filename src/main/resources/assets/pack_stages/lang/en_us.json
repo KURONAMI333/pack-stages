@@ -11,6 +11,5 @@
   "pack_stages.command.list": "%s has %s stage(s): %s",
   "pack_stages.command.has.yes": "%s has stage %s",
   "pack_stages.command.has.no": "%s does not have stage %s",
-  "pack_stages.command.stages": "%s stage(s) defined: %s. Milestones: %s",
-  "pack_stages.command.milestones.reset": "Forgot %s milestone record(s)"
+  "pack_stages.command.stages": "%s stage(s) defined: %s"
 }

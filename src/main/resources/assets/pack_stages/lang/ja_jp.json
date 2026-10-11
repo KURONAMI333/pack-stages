@@ -11,6 +11,5 @@
   "pack_stages.command.list": "%s の段階（%s 個）: %s",
   "pack_stages.command.has.yes": "%s は段階 %s を持っています",
   "pack_stages.command.has.no": "%s は段階 %s を持っていません",
-  "pack_stages.command.stages": "定義済みの段階 %s 個: %s。初取得の報酬: %s 件",
-  "pack_stages.command.milestones.reset": "初取得の記録を %s 件消しました"
+  "pack_stages.command.stages": "定義済みの段階 %s 個: %s"
 }

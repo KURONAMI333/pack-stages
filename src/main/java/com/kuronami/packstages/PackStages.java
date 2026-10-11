@@ -45,11 +45,9 @@ public final class PackStages {
 
         IEventBus bus = NeoForge.EVENT_BUS;
         bus.register(RestrictionEvents.class);
-        bus.register(MilestoneTracker.class);
         bus.addListener((RegisterCommandsEvent e) -> StagesCommand.register(e.getDispatcher()));
         bus.addListener((AddReloadListenerEvent e) -> {
             e.addListener(new ServerStageData.StagesLoader(e.getRegistryAccess()));
-            e.addListener(new ServerStageData.MilestonesLoader());
         });
         bus.addListener((TagsUpdatedEvent e) -> {
             if (e.getUpdateCause() == TagsUpdatedEvent.UpdateCause.SERVER_DATA_LOAD) ServerStageData.rebuild();

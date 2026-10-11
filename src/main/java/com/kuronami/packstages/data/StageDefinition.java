@@ -36,7 +36,7 @@ public record StageDefinition(String name, Optional<Component> display, List<Str
             Codec.STRING.listOf().optionalFieldOf("use", List.of()).forGetter(StageDefinition::use),
             Codec.STRING.listOf().optionalFieldOf("blocks", List.of()).forGetter(StageDefinition::blocks),
             Codec.STRING.listOf().optionalFieldOf("menus", List.of()).forGetter(StageDefinition::menus),
-            JeiMode.CODEC.optionalFieldOf("jei", JeiMode.HIDE).forGetter(StageDefinition::jei)
+            JeiMode.CODEC.optionalFieldOf("jei", JeiMode.SHOW).forGetter(StageDefinition::jei)
     ).apply(i, (display, items, craft, use, blocks, menus, jei) ->
             new StageDefinition("", display, items, craft, use, blocks, menus, jei)));
 

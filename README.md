@@ -4,7 +4,7 @@ Per-player stages for modpacks. The pack decides, in datapack JSON, what each st
 
 - Minecraft 1.21.1, NeoForge
 - Required on both server and client
-- Optional: JEI (locked items are hidden, or listed with an "Unlocks at" hint)
+- Optional: JEI (locked items are listed with an "Unlocks at" hint, or hidden)
 
 ## Commands
 
@@ -17,8 +17,7 @@ Permission level 2 (the level datapack functions and Pufferfish's Skills command
 | `/pack_stages clear <players>` | Remove all stages |
 | `/pack_stages list [player]` | Show a player's stages |
 | `/pack_stages has <player> <stage>` | Returns 1 or 0 (`execute if`/`store result`) |
-| `/pack_stages stages` | Show the stages and milestones the loaded data defines |
-| `/pack_stages milestones reset <players> [milestone]` | Forget "already obtained" records |
+| `/pack_stages stages` | Show the stages the loaded data defines |
 
 Stages are saved with the player and kept on death.
 
@@ -34,7 +33,7 @@ One file per stage: `data/<namespace>/pack_stages/stages/<path>.json`. The stage
   "use": [],
   "items": [],
   "menus": [],
-  "jei": "hide"
+  "jei": "show"
 }
 ```
 
@@ -46,28 +45,11 @@ One file per stage: `data/<namespace>/pack_stages/stages/<path>.json`. The stage
 | `items` | Both `craft` and `use` |
 | `blocks` | Right-clicking the block does nothing, so its screen doesn't open |
 | `menus` | Screens of these menu types close as soon as they open, however they were opened |
-| `jei` | `hide` (default): locked items are removed from JEI's list until unlocked. `show`: they stay listed; the tooltip says what unlocks them |
+| `jei` | `show` (default): locked items stay listed; the tooltip says what unlocks them. `hide`: they are removed from JEI's list until unlocked |
 
 Every list accepts an id (`minecraft:stick`), a tag (`#c:ingots`), every entry of a mod (`@lilis_pottery`), or an id with `*` wildcards (`lilis_pottery:*_vase`). Ids of mods that aren't installed are ignored, so one data set can serve several packs. If several files (or datapacks) define the same stage name, their lists are combined. A thing listed under several stages needs all of them.
 
 Players always see why they were refused, on the action bar: "You can't use the Kiln yet. Unlocks at: Potter - Journeyman".
-
-## First-time milestones
-
-`data/<namespace>/pack_stages/milestones/<path>.json` runs commands the first time a player holds one of the listed items, however they got it (any workstation, a chest, a trade, a command).
-
-```json
-{
-  "items": ["lilis_pottery:*garden_pot", "lilis_pottery:*vase"],
-  "mode": "each",
-  "commands": ["puffish_skills experience add @s artisan:potter 10"]
-}
-```
-
-- `mode`: `each` (default) runs once per distinct item; `once` runs once for the whole list.
-- Commands run as the player (`@s`) at function permission level. `{item}` is replaced with the item id.
-- The record is per player and saved; losing and picking the item up again doesn't count twice.
-- Commands run on the tick after the item is first seen. A milestone is recorded before its commands run, so it pays out at most once even if a command fails (for example a misspelled category).
 
 ## With Pufferfish's Skills
 
@@ -81,7 +63,7 @@ Use a command reward on the skill. `lock_command` runs when the skill is taken b
 ]
 ```
 
-A complete example (a Potter profession with Lili's Pottery: apprentice unlocks the pottery table and basic pots, journeyman the kiln, vases and amphorae; each new shape gives Potter experience) is in [`examples/artisan_potter`](examples/artisan_potter).
+A complete example (a Potter profession with Lili's Pottery: apprentice unlocks the pottery table and basic pots, journeyman the kiln, vases and amphorae) is in [`examples/artisan_potter`](examples/artisan_potter).
 
 ## Not covered
 
