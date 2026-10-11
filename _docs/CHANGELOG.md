@@ -5,7 +5,7 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) — [Semver](ht
 
 ## [Unreleased]
 
-## [0.1.0] - YYYY-MM-DD
+## [0.1.0] - 2026-10-11
 
 ### Added
 - Per-player stages defined in datapack JSON that lock making items, using items, workstation blocks and screens
