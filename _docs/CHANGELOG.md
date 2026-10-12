@@ -5,6 +5,14 @@ Format: [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) — [Semver](ht
 
 ## [Unreleased]
 
+## [0.1.1] - 2026-10-12
+
+### Changed
+- Locked items now stay listed in JEI with an "Unlocks at" line by default. Before, they were hidden until unlocked; `"jei": "hide"` still hides them
+
+### Removed
+- First-time milestones. Use an advancement with a function reward instead
+
 ## [0.1.0] - 2026-10-11
 
 ### Added
